@@ -1,30 +1,30 @@
-  print("Vertex ", v, " already exists.")
-  else:
-    graph[v] = []
+class Graph:
+	elements = {}
+	def __init__(self, node, edges):
+		self.elements[node] = edges
 
-def add_edge(v1, v2, e):
-    temp = [v2, e]
-    graph[v1].append(temp)
+	def addEdge(self, node ,edge):
+		if node in self.elements.keys():
+			self.elements[node] += edge
+		else:
+			self.elements[node] = edge
+	def getAdjencyList(self):
+		return self.elements
+	def getAdjencyMatrix(self):
+		keys = list(self.elements.keys())
+		keys.sort()
+		ret =  [[0] * len(keys) for i in range(len(keys))]
+		for k in range(len(keys)):
+			for j in self.elements[keys[k]]:
+				ret[k][keys.index(j)] = 1
+		return ret
 
-def print_graph():
-  global graph
-  for vertex in graph:
-    for edges in graph[vertex]:
-      print("(", vertex, "->", edges[0],",",edges[1], ")",end = " ")
-    print()
-
-graph = {}
-add_vertex(0)
-add_vertex(1)
-add_vertex(2)
-add_vertex(3)
-add_vertex(4)
-add_vertex(5)
-add_edge(0, 1, 6)
-add_edge(1, 2, 7)
-add_edge(2, 0, 5)
-add_edge(2, 1, 4)
-add_edge(3, 2, 10)
-add_edge(4, 5, 3)
-add_edge(5, 4, 1)
-print_graph()
+if __name__ == "__main__":
+	g =Graph("A",["B","C", "E"])
+	g.addEdge('C',["A","B","D","E"])
+	g.addEdge("B",["A",'C',"D"])
+	g.addEdge("E",["A","C"])
+	g.addEdge("D",["B","C"])
+	print(g.getAdjencyList())
+	print()
+	print(g.getAdjencyMatrix())
