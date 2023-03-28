@@ -18,7 +18,7 @@ add_edge(4,1)
 add_edge(2,3)
 add_edge(3,1)
 print(graph)
-  
+
 set1 = graph.keys()
 set2 = []
 for k in graph:
@@ -48,5 +48,4 @@ def BFS(G,v,visited):
                 queue.append(i)
                 visited[i] = True
     return visited
-    
-    print(BFS(graph,5,{}))
+print(BFS(graph,5,{}))
